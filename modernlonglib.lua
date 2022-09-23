@@ -6,8 +6,8 @@ local Mouse = game.Players.LocalPlayer:GetMouse()
 
 local Blacklist = {Enum.KeyCode.Unknown, Enum.KeyCode.CapsLock, Enum.KeyCode.Escape, Enum.KeyCode.Tab, Enum.KeyCode.Return, Enum.KeyCode.Backspace, Enum.KeyCode.Space, Enum.KeyCode.W, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.D}
 
-if CoreGui:FindFirstChild("Shaman") then
-    CoreGui.Shaman:Destroy()
+if CoreGui:FindFirstChild("ToldeUi") then
+    CoreGui.ToldeUi:Destroy()
     CoreGui.Tooltips:Destroy()
 end
 
@@ -52,7 +52,7 @@ local getcustomasset = getcustomasset or getsynasset
 local isfolder = isfolder or syn_isfolder or is_folder
 local makefolder = makefolder or make_folder or createfolder or create_folder
 
-if not isfolder("Shaman") then
+if not isfolder("ToldeUi") then
 local download = Instance.new("ScreenGui")
 download.Name = "Download"
 download.Enabled = true
@@ -123,34 +123,34 @@ dText.Position = UDim2.new(0.00132, 0, 0.39, 0)
 dText.Size = UDim2.new(0, 284, 0, 46)
 dText.Parent = dMain
     
-makefolder("Shaman")
+makefolder("ToldeUi")
     
-local Circle = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/Circle.png", Method = "GET"})
-writefile("Shaman/Circle.png", Circle.Body)
+local Circle = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/Circle.png", Method = "GET"})
+writefile("ToldeUi/Circle.png", Circle.Body)
 dText.Text = "Downloaded: Circle.png"
     
-local ColorDropper = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/ColorDropper.png", Method = "GET"})
-writefile("Shaman/ColorDropper.png", ColorDropper.Body)
+local ColorDropper = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/ColorDropper.png", Method = "GET"})
+writefile("ToldeUi/ColorDropper.png", ColorDropper.Body)
 dText.Text = "Downloaded: ColorDropper.png"
 
-local Close = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/Close.png", Method = "GET"})
-writefile("Shaman/Close.png", Close.Body)
+local Close = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/Close.png", Method = "GET"})
+writefile("ToldeUi/Close.png", Close.Body)
 dText.Text = "Downloaded: Close.png"
 
-local CollapseArrow = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/CollapseArrow.png", Method = "GET"})
-writefile("Shaman/CollapseArrow.png", CollapseArrow.Body)
+local CollapseArrow = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/CollapseArrow.png", Method = "GET"})
+writefile("ToldeUi/CollapseArrow.png", CollapseArrow.Body)
 dText.Text = "Downloaded: CollapseArrow.png"
     
-local RadioButton = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioButton.png", Method = "GET"})
-writefile("Shaman/RadioButton.png", RadioButton.Body)
+local RadioButton = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/RadioButton.png", Method = "GET"})
+writefile("ToldeUi/RadioButton.png", RadioButton.Body)
 dText.Text = "Downloaded: RadioButton.png"
     
-local RadioOuter = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioOuter.png", Method = "GET"})
-writefile("Shaman/RadioOuter.png", RadioOuter.Body)
+local RadioOuter = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/RadioOuter.png", Method = "GET"})
+writefile("ToldeUi/RadioOuter.png", RadioOuter.Body)
 dText.Text = "Downloaded: RadioOuter.png"
     
-local RadioInner = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioInner.png", Method = "GET"})
-writefile("Shaman/RadioInner.png", RadioInner.Body)
+local RadioInner = request({Url = "https://raw.githubusercontent.com/ToldeIsCool/Designs/main/RadioInner.png", Method = "GET"})
+writefile("ToldeUi/RadioInner.png", RadioInner.Body)
 dText.Text = "Downloaded: RadioInner.png"
 
 download:Destroy()
@@ -163,13 +163,13 @@ function library:GetXY(GuiObject)
 end
 
 function library:Window(Info)
-Info.Text = Info.Text or "Shaman"
+Info.Text = Info.Text or "ToldeUi"
 
 local window = {}
 
-local shamanScreenGui = Instance.new("ScreenGui")
-shamanScreenGui.Name = "Shaman"
-shamanScreenGui.Parent = CoreGui
+local ToldeUiScreenGui = Instance.new("ScreenGui")
+ToldeUiScreenGui.Name = "ToldeUi"
+ToldeUiScreenGui.Parent = CoreGui
 
 local tooltipScreenGui = Instance.new("ScreenGui")
 tooltipScreenGui.Name = "Tooltips"
@@ -252,7 +252,7 @@ main.BorderSizePixel = 0
 main.ClipsDescendants = true
 main.Position = UDim2.new(0.361, 0, 0.308, 0)
 main.Size = UDim2.new(0, 450, 0, 321)
-main.Parent = shamanScreenGui
+main.Parent = ToldeUiScreenGui
 
 local uICorner = Instance.new("UICorner")
 uICorner.Name = "UICorner"
@@ -350,7 +350,7 @@ textLabel.Parent = topbar
 
 local closeButton = Instance.new("ImageButton")
 closeButton.Name = "CloseButton"
-closeButton.Image = getcustomasset("Shaman/Close.png")
+closeButton.Image = getcustomasset("ToldeUi/Close.png")
 closeButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
 closeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.BackgroundTransparency = 1
@@ -360,7 +360,7 @@ closeButton.ZIndex = 2
 closeButton.Parent = topbar
 
 closeButton.MouseButton1Click:Once(function()
-    shamanScreenGui:Destroy()
+    ToldeUiScreenGui:Destroy()
     tooltipScreenGui:Destroy()
 end)
 
@@ -418,7 +418,7 @@ end)
 
 local editButton = Instance.new("ImageButton")
 editButton.Name = "EditButton"
-editButton.Image = getcustomasset("Shaman/ColorDropper.png")
+editButton.Image = getcustomasset("ToldeUi/ColorDropper.png")
 editButton.ImageColor3 = Color3.fromRGB(237, 237, 237)
 editButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 editButton.BackgroundTransparency = 1
@@ -1135,7 +1135,7 @@ toggleUICorner.Parent = toggleFrame
 
 local circleIcon = Instance.new("ImageLabel")
 circleIcon.Name = "CheckIcon"
-circleIcon.Image = getcustomasset("Shaman/Circle.png")
+circleIcon.Image = getcustomasset("ToldeUi/Circle.png")
 circleIcon.ImageColor3 = Color3.fromRGB(217, 217, 217)
 circleIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 circleIcon.BackgroundTransparency = 1
@@ -1356,7 +1356,7 @@ dropdownText.Parent = dropdown
 
 local dropdownIcon = Instance.new("ImageLabel")
 dropdownIcon.Name = "DropdownIcon"
-dropdownIcon.Image = getcustomasset("Shaman/CollapseArrow.png")
+dropdownIcon.Image = getcustomasset("ToldeUi/CollapseArrow.png")
 dropdownIcon.ImageColor3 = Color3.fromRGB(191, 191, 191)
 dropdownIcon.AnchorPoint = Vector2.new(1, 0)
 dropdownIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1590,7 +1590,7 @@ radioButtonText.Parent = button
 
 local radioButtonIcon = Instance.new("ImageLabel")
 radioButtonIcon.Name = "RadioButtonIcon"
-radioButtonIcon.Image = getcustomasset("Shaman/CollapseArrow.png")
+radioButtonIcon.Image = getcustomasset("ToldeUi/CollapseArrow.png")
 radioButtonIcon.AnchorPoint = Vector2.new(1, 0)
 radioButtonIcon.ImageColor3 = Color3.fromRGB(191, 191, 191)
 radioButtonIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1603,7 +1603,7 @@ radioButtonIcon.Parent = button
 
 local radioButtonIcon2 = Instance.new("ImageLabel")
 radioButtonIcon2.Name = "RadioButtonIcon2"
-radioButtonIcon2.Image = getcustomasset("Shaman/RadioButton.png")
+radioButtonIcon2.Image = getcustomasset("ToldeUi/RadioButton.png")
 radioButtonIcon2.AnchorPoint = Vector2.new(1, 0)
 radioButtonIcon2.ImageColor3 = Color3.fromRGB(191, 191, 191)
 radioButtonIcon2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1656,7 +1656,7 @@ radioTextButton.Parent = radio
 
 local radioOuter = Instance.new("ImageLabel")
 radioOuter.Name = "RadioOuter"
-radioOuter.Image = getcustomasset("Shaman/RadioOuter.png")
+radioOuter.Image = getcustomasset("ToldeUi/RadioOuter.png")
 radioOuter.ImageColor3 = Color3.fromRGB(191, 191, 191)
 radioOuter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 radioOuter.BackgroundTransparency = 1
@@ -1667,7 +1667,7 @@ radioOuter.Parent = radio
 
 local radioInner = Instance.new("ImageLabel")
 radioInner.Name = "RadioInner"
-radioInner.Image = getcustomasset("Shaman/RadioInner.png")
+radioInner.Image = getcustomasset("ToldeUi/RadioInner.png")
 radioInner.AnchorPoint = Vector2.new(0.5, 0.5)
 radioInner.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 radioInner.BackgroundTransparency = 1
