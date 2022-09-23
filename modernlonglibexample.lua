@@ -1,195 +1,310 @@
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ToldeIsCool/longlib/main/modernlonglib.lua'))()
--- [remove all these below and make your own, this is just a template for you] ------------------------------------------------------------------------------------------------
--- [Legit Tab UI] ------------------------------------------------------------------------------------------------------------------------------------------------------------
-local ToldeTab = library:AddTab("Legit"); 
-local ToldeColunm1 = LegitTab:AddColumn();
-local ToldeMain = LegitColunm1:AddSection("Aim Assist")
+local repo = 'https://raw.githubusercontent.com/ToldeIsCool/longlib/main/modernlonglib.lua'
 
-ToldeMain:AddDivider("Main");
-ToldeMain:AddToggle{text = "Enabled", flag = "AimbotEnabled"}
-ToldeMain:AddSlider{text = "Aimbot FOV", flag = "AimbotFov", min = 0, max = 750, value = 105, suffix = "°"}
-ToldeMain:AddSlider{text = "Smoothing Factor", flag = "Smoothing", min = 0, max = 30, value = 3, suffix = "%"}
-ToldeMain:AddList({text = "Hit Box", flag = "AimbotHitbox", value = "Head", values = {"Head", "Torso"}});
-ToldeMain:AddList({text = "Aimbot Key", flag = "AimbotKey", value = "On Aim", values = {"On Aim", "On Shoot"}});
-ToldeMain:AddDivider("Draw Fov");
-ToldeMain:AddToggle{text = "Enabled", flag = "CircleEnabled"}:AddColor({flag = "CircleColor", color = Color3.new(1, 1, 1)});
-ToldeMain:AddSlider{text = "Num Sides", flag = "CircleNumSides", min = 3, max = 48, value = 48, suffix = "°"}
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
-local ToldeSecond = ToldeColunm1:AddSection("Extend Hitbox")
-ToldeSecond:AddDivider("Main");
-ToldeSecond:AddToggle{text = "Enabled", flag = "HitboxEnabled"}
-ToldeSecond:AddList({text = "Hit Box", flag = "ExtendHitbox", value = "Head", values = {"Head", "Torso"}});
-ToldeSecond:AddSlider{text = "Extend Rate", flag = "ExtendRate", min = 0, max = 10, value = 10, suffix = "%"}
+local Window = Library:CreateWindow({
+    -- Set Center to true if you want the menu to appear in the center
+    -- Set AutoShow to true if you want the menu to appear when it is created
+    -- Position and Size are also valid options here
+    -- but you do not need to define them unless you are changing them :)
 
-local ToldeThird = ToldeColunm1:AddSection("Trigger Bot")
-ToldeThird:AddDivider("Main");
-ToldeThird:AddToggle{text = "Enabled", flag = "TriggerEnabled"}:AddBind({flag = "TriggerBind", key = "One"});
-ToldeThird:AddSlider{text = "Trigger Speed", flag = "TriggerSpeed", min = 0, max = 1000, value = 10, suffix = "%"}
+    Title = 'Example menu',
+    Center = true, 
+    AutoShow = true,
+})
 
-local ToldeColunm2 = ToldeTab:AddColumn();
-local ToldeForth = ToldeColunm2:AddSection("Bullet Redirection")
-ToldeForth:AddDivider("Main");
-ToldeForth:AddToggle{text = "Enabled", flag = "SilentAimEnabled"}
-ToldeForth:AddSlider{text = "Silent Aim FOV", flag = "SilentAimFOV", min = 0, max = 750, value = 105, suffix = "°"}
-ToldeForth:AddSlider{text = "Hit Chances", flag = "HitChances", min = 0, max = 100, value = 100, suffix = "%"}
-ToldeForth:AddList({text = "Redirection Mode", flag = "RedirectionMode", value = "P Mode", values = {"P Mode", "Normal Mode"}});
-ToldeForth:AddList({text = "Hit Box", flag = "SilentAimHitbox", value = "Head", values = {"Head", "Torso"}});
-ToldeForth:AddDivider("Draw Fov");
-ToldeForth:AddToggle{text = "Enabled", flag = "Circle2Enabled"}:AddColor({flag = "Circle2Color", color = Color3.new(1, 1, 1)});
-ToldeForth:AddSlider{text = "Num Sides", flag = "Circle2NumSides", min = 3, max = 48, value = 48, suffix = "°"}
-ToldeForth:AddDivider("Checks");
-ToldeForth:AddToggle{text = "Enabled", flag = "VisibleCheck"}
+-- You do not have to set your tabs & groups up this way, just a prefrence.
+local Tabs = {
+    -- Creates a new tab titled Main
+    Main = Window:AddTab('Main'), 
+    ['UI Settings'] = Window:AddTab('UI Settings'),
+}
 
-local ToldeFifth = ToldeColunm2:AddSection("Recoil Control")
-ToldeFifth:AddDivider("Main");
-ToldeFifth:AddToggle{text = "Enabled", flag = "RecoilControlEnabled"}
-ToldeFifth:AddSlider{text = "Model Kick", flag = "ModelKick", min = 5, max = 100, value = 100, suffix = "%"}
-ToldeFifth:AddSlider{text = "Camera Kick", flag = "CameraKick", min = 5, max = 100, value = 100, suffix = "%"}
+-- Groupbox and Tabbox inherit the same functions
+-- except Tabboxes you have to call the functions on a tab (Tabbox:AddTab(name))
+local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Groupbox')
 
--- [Rage Tab UI] ------------------------------------------------------------------------------------------------------------------------------------------------------------
-local RageTab = library:AddTab("Rage"); 
-local RageColunm1 = RageTab:AddColumn();
-local RageMain = RageColunm1:AddSection("Auto Wall")
+-- Tabboxes are a tiny bit different, but here's a basic example:
+--[[
 
-RageMain:AddDivider("Main");
-RageMain:AddToggle{text = "Enabled", flag = "AutoWallEnabled"}
+local TabBox = Tabs.Main:AddLeftTabbox() -- Add Tabbox on left side
 
--- [Visuals Tab UI] ------------------------------------------------------------------------------------------------------------------------------------------------------------
-local VisualsTab = library:AddTab("Visuals"); 
-local VisualsColunm1 = VisualsTab:AddColumn();
-local VisualsMain = VisualsColunm1:AddSection("Local Visuals")
+local Tab1 = TabBox:AddTab('Tab 1')
+local Tab2 = TabBox:AddTab('Tab 2')
 
-VisualsMain:AddDivider("Main");
-VisualsMain:AddToggle{text = "Enabled", flag = "LocalVisualsEnabled"}
-VisualsMain:AddToggle{text = "Custom Arm", flag = "CustomArm"}:AddColor({flag = "ArmColor", color = Color3.new(0.599623620510101318359375, 0.447115242481231689453125, 0.97174417972564697265625)});
-VisualsMain:AddSlider{text = "Transparency", flag = "ArmTransparency", min = 0.10, max = 0.95, float = 0.01, value = 0.85, suffix = "%"}
-VisualsMain:AddList({text = "Material", flag = "ArmMaterial", value = "ForceField", values = {"ForceField", "Neon", "SmoothPlastic"}});
-VisualsMain:AddToggle{text = "Custom Weapon", flag = "CustomWeapon"}:AddColor({flag = "WeaponColor", color = Color3.new(1, 1, 1)});
-VisualsMain:AddSlider{text = "Transparency", flag = "WeaponTransparency", min = 0.10, max = 0.95, float = 0.01, value = 0.85, suffix = "%"}
-VisualsMain:AddList({text = "Material", flag = "WeaponMaterial", value = "ForceField", values = {"ForceField", "Neon", "SmoothPlastic"}});
-VisualsMain:AddDivider("Mesh");
-VisualsMain:AddToggle{text = "Enabled", flag = "TextureEnabled"}
-VisualsMain:AddList({text = "Arm Animation", flag = "ArmAnimation", value = "Bubbles", values = {"Bubbles", "Scanning"}});
-VisualsMain:AddList({text = "Weapon Animation", flag = "WeaponAnimation", value = "Bubbles", values = {"Bubbles", "Scanning"}});
-VisualsMain:AddDivider("Third Person");
-VisualsMain:AddToggle{text = "Enabled", flag = "ThirdPersonEnabled"}:AddColor({flag = "ThirdPersonColor", color = Color3.new(1, 1, 1)});
-VisualsMain:AddList({text = "Material", flag = "ThirdPersonMaterial", value = "ForceField", values = {"ForceField", "SmoothPlastic"}});
+-- You can now call AddToggle, etc on the tabs you added to the Tabbox
+]]
 
-local VisualsColunm2 = VisualsTab:AddColumn();
-local VisualsSecond = VisualsColunm2:AddSection("Camera Visuals")
+-- Groupbox:AddToggle
+-- Arguments: Index, Options
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'This is a toggle',
+    Default = true, -- Default value (true / false)
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+})
 
-VisualsSecond:AddDivider("Main");
-VisualsSecond:AddToggle{text = "Enabled", flag = "CameraVisualsEnabled"}
-VisualsSecond:AddToggle{text = "Change Camera FOV", flag = "ChangeCameraFOV"}
-VisualsSecond:AddSlider{text = "Camera FOV", flag = "CameraFOV", min = 10, max = 120, value = 120, suffix = "°"}
-VisualsSecond:AddToggle{text = "Remove Round Lock", flag = "RemoveRoundLock"}
-VisualsSecond:AddToggle{text = "No Camera Bob", flag = "NoCameraBob"}
-VisualsSecond:AddToggle{text = "No Gun Bob", flag = "NoGunBob"}
-VisualsSecond:AddToggle{text = "Remove Gun Scope", flag = "RemoveGunScope"}
-VisualsSecond:AddToggle{text = "Anti Suppression", flag = "AntiSuppression"}
 
--- [Library Settings UI] -----------------------------------------------------------------------------------------------------------------------------------------------------
-local SettingsTab = library:AddTab("Settings"); 
-local SettingsColumn = SettingsTab:AddColumn(); 
-local SettingsColumn2 = SettingsTab:AddColumn(); 
-local SettingSection = SettingsColumn:AddSection("Menu"); 
-local ConfigSection = SettingsColumn2:AddSection("Configs");
-local Warning = library:AddWarning({type = "confirm"});
+-- Fetching a toggle object for later use:
+-- Toggles.MyToggle.Value
 
-SettingSection:AddBind({text = "Open / Close", flag = "UI Toggle", nomouse = true, key = "End", callback = function()
-    library:Close();
-end});
+-- Toggles is a table added to getgenv() by the library
+-- You index Toggles with the specified index, in this case it is 'MyToggle'
+-- To get the state of the toggle you do toggle.Value
 
-SettingSection:AddColor({text = "Accent Color", flag = "Menu Accent Color", color = Color3.new(0.599623620510101318359375, 0.447115242481231689453125, 0.97174417972564697265625), callback = function(color)
-    if library.currentTab then
-        library.currentTab.button.TextColor3 = color;
+-- Calls the passed function when the toggle is updated
+Toggles.MyToggle:OnChanged(function()
+    -- here we get our toggle object & then get its value
+    print('MyToggle changed to:', Toggles.MyToggle.Value)
+end)
+
+-- This should print to the console: "My toggle state changed! New value: false"
+Toggles.MyToggle:SetValue(false)
+
+-- Groupbox:AddButton
+-- Arguments: Text, Callback
+
+local MyButton = LeftGroupBox:AddButton('Button', function()
+    print('You clicked a button!')
+end)
+
+-- Button:AddButton
+-- Arguments: Text, Callback
+-- Adds a sub button to the side of the main button
+
+local MyButton2 = MyButton:AddButton('Sub button', function()
+    print('You clicked a sub button!')
+end)
+
+-- Button:AddTooltip
+-- Arguments: ToolTip
+
+MyButton:AddTooltip('This is a button')
+MyButton2:AddTooltip('This is a sub button')
+
+-- NOTE: You can chain the button methods!
+--[[
+    EXAMPLE: 
+
+    LeftGroupBox:AddButton('Kill all', Functions.KillAll):AddTooltip('This will kill everyone in the game!')
+        :AddButton('Kick all', Functions.KickAll):AddTooltip('This will kick everyone in the game!')
+]]
+
+-- Groupbox:AddLabel
+-- Arguments: Text, DoesWrap
+LeftGroupBox:AddLabel('This is a label')
+LeftGroupBox:AddLabel('This is a label\n\nwhich wraps its text!', true)
+
+-- Groupbox:AddDivider
+-- Arguments: None
+LeftGroupBox:AddDivider()
+
+-- Groupbox:AddSlider
+-- Arguments: Idx, Options
+LeftGroupBox:AddSlider('MySlider', {
+    Text = 'This is my slider!',
+
+    -- Text, Default, Min, Max, Rounding must be specified.
+    -- Rounding is the number of decimal places for precision.
+
+    -- Example:
+    -- Rounding 0 - 5
+    -- Rounding 1 - 5.1
+    -- Rounding 2 - 5.15
+    -- Rounding 3 - 5.155
+
+    Default = 0,
+    Min = 0,
+    Max = 5,
+    Rounding = 1,
+
+    Compact = false, -- If set to true, then it will hide the label
+})
+
+-- Options is a table added to getgenv() by the library
+-- You index Options with the specified index, in this case it is 'MySlider'
+-- To get the value of the slider you do slider.Value
+
+local Number = Options.MySlider.Value
+Options.MySlider:OnChanged(function()
+    print('MySlider was changed! New value:', Options.MySlider.Value)
+end)
+
+-- This should print to the console: "MySlider was changed! New value: 3"
+Options.MySlider:SetValue(3)
+
+-- Groupbox:AddInput
+-- Arguments: Idx, Info
+LeftGroupBox:AddInput('MyTextbox', {
+    Default = 'My textbox!',
+    Numeric = false, -- true / false, only allows numbers
+    Finished = false, -- true / false, only calls callback when you press enter
+
+    Text = 'This is a textbox',
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the textbox
+
+    Placeholder = 'Placeholder text', -- placeholder text when the box is empty
+    -- MaxLength is also an option which is the max length of the text
+})
+
+Options.MyTextbox:OnChanged(function()
+    print('Text updated. New text:', Options.MyTextbox.Value)
+end)
+
+-- Groupbox:AddDropdown
+-- Arguments: Idx, Info
+
+LeftGroupBox:AddDropdown('MyDropdown', {
+    Values = { 'This', 'is', 'a', 'dropdown' },
+    Default = 1, -- number index of the value / string
+    Multi = false, -- true / false, allows multiple choices to be selected
+
+    Text = 'A dropdown',
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the textbox
+})
+
+Options.MyDropdown:OnChanged(function()
+    print('Dropdown got changed. New value:', Options.MyDropdown.Value)
+end)
+
+Options.MyDropdown:SetValue('This')
+
+-- Multi dropdowns
+LeftGroupBox:AddDropdown('MyMultiDropdown', {
+    -- Default is the numeric index (e.g. "This" would be 1 since it if first in the values list)
+    -- Default also accepts a string as well
+
+    -- Currently you can not set multiple values with a dropdown
+
+    Values = { 'This', 'is', 'a', 'dropdown' },
+    Default = 1, 
+    Multi = true, -- true / false, allows multiple choices to be selected
+
+    Text = 'A dropdown',
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the textbox
+})
+
+Options.MyMultiDropdown:OnChanged(function()
+    -- print('Dropdown got changed. New value:', )
+    print('Multi dropdown got changed:')
+    for key, value in next, Options.MyMultiDropdown.Value do
+        print(key, value) -- should print something like This, true
     end
-    for i,v in pairs(library.theme) do
-        v[(v.ClassName == "TextLabel" and "TextColor3") or (v.ClassName == "ImageLabel" and "ImageColor3") or "BackgroundColor3"] = color;
-    end
-end});
+end)
 
--- [Background List]
-local backgroundlist = {
-    Floral = "rbxassetid://5553946656",
-    Flowers = "rbxassetid://6071575925",
-    Circles = "rbxassetid://6071579801",
-    Hearts = "rbxassetid://6073763717"
-};
+Options.MyMultiDropdown:SetValue({
+    This = true,
+    is = true,
+})
 
--- [Background List]
-local back = SettingSection:AddList({text = "Background", max = 4, flag = "background", values = {"Floral", "Flowers", "Circles", "Hearts"}, value = "Floral", callback = function(v)
-    if library.main then
-        library.main.Image = backgroundlist[v];
-    end
-end});
+-- Label:AddColorPicker
+-- Arguments: Idx, Info
 
--- [Background Color Picker]
-back:AddColor({flag = "backgroundcolor", color = Color3.new(), callback = function(color)
-    if library.main then
-        library.main.ImageColor3 = color;
-    end
-end, trans = 1, calltrans = function(trans)
-    if library.main then
-        library.main.ImageTransparency = 1 - trans;
-    end
-end});
+-- You can also ColorPicker & KeyPicker to a Toggle as well
 
--- [Tile Size Slider]
-SettingSection:AddSlider({text = "Tile Size", min = 50, max = 500, value = 50, callback = function(size)
-    if library.main then
-        library.main.TileSize = UDim2.new(0, size, 0, size);
-    end
-end});
+LeftGroupBox:AddLabel('Color'):AddColorPicker('ColorPicker', {
+    Default = Color3.new(0, 1, 0), -- Bright green
+    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+})
 
--- [Discord Button]
-SettingSection:AddButton({text = "Discord", callback = function()
-end});
+Options.ColorPicker:OnChanged(function()
+    print('Color changed!', Options.ColorPicker.Value)
+end)
 
--- [Config Box]
-ConfigSection:AddBox({text = "Config Name", skipflag = true});
+Options.ColorPicker:SetValueRGB(Color3.fromRGB(0, 255, 140))
 
--- [Config List]
-ConfigSection:AddList({text = "Configs", skipflag = true, value = "", flag = "Config List", values = library:GetConfigs()});
+LeftGroupBox:AddLabel('Keybind'):AddKeyPicker('KeyPicker', {
+    -- SyncToggleState only works with toggles. 
+    -- It allows you to make a keybind which has its state synced with its parent toggle
 
--- [Create Button]
-ConfigSection:AddButton({text = "Create", callback = function()
-    library:GetConfigs();
-    writefile(library.foldername .. "/" .. library.flags["Config Name"] .. library.fileext, "{}");
-    library.options["Config List"]:AddValue(library.flags["Config Name"]);
-end});
+    -- Example: Keybind which you use to toggle flyhack, etc.
+    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
 
--- [Save Button]
-ConfigSection:AddButton({text = "Save", callback = function()
-    local r, g, b = library.round(library.flags["Menu Accent Color"]);
-    Warning.text = "Are you sure you want to save the current settings to config <font color='rgb(" .. r .. "," .. g .. "," .. b .. ")'>" .. library.flags["Config List"] .. "</font>?";
-    if Warning:Show() then
-        library:SaveConfig(library.flags["Config List"]);
-    end
-end});
+    Default = 'MB2', -- String as the name of the keybind (MB1, MB2 for mouse buttons)  
+    SyncToggleState = false, 
 
--- [Load Button]
-ConfigSection:AddButton({text = "Load", callback = function()
-    local r, g, b = library.round(library.flags["Menu Accent Color"]);
-    Warning.text = "Are you sure you want to load config <font color='rgb(" .. r .. "," .. g .. "," .. b .. ")'>" .. library.flags["Config List"] .. "</font>?";
-    if Warning:Show() then
-        library:LoadConfig(library.flags["Config List"]);
-    end
-end});
 
--- [Delete Button]
-ConfigSection:AddButton({text = "Delete", callback = function()
-    local r, g, b = library.round(library.flags["Menu Accent Color"]);
-    Warning.text = "Are you sure you want to delete config <font color='rgb(" .. r .. "," .. g .. "," .. b .. ")'>" .. library.flags["Config List"] .. "</font>?";
-    if Warning:Show() then
-        local config = library.flags["Config List"];
-        if table.find(library:GetConfigs(), config) and isfile(library.foldername .. "/" .. config .. library.fileext) then
-            library.options["Config List"]:RemoveValue(config);
-            delfile(library.foldername .. "/" .. config .. library.fileext);
+    -- You can define custom Modes but I have never had a use for it.
+    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+
+    Text = 'Auto lockpick safes', -- Text to display in the keybind menu
+    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+})
+
+-- OnClick is only fired when you press the keybind and the mode is Toggle
+-- Otherwise, you will have to use Keybind:GetState()
+Options.KeyPicker:OnClick(function()
+    print('Keybind clicked!', Options.KeyPicker.Value)
+end)
+
+task.spawn(function()
+    while true do
+        wait(1)
+
+        -- example for checking if a keybind is being pressed
+        local state = Options.KeyPicker:GetState()
+        if state then
+            print('KeyPicker is being held down')
         end
-    end
-end});
 
--- [Init] --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-library:Init();
-library:selectTab(library.tabs[1]);
+        if Library.Unloaded then break end
+    end
+end)
+
+Options.KeyPicker:SetValue({ 'MB2', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
+
+-- Library functions
+-- Sets the watermark visibility
+Library:SetWatermarkVisibility(true)
+
+-- Sets the watermark text
+Library:SetWatermark('This is a really long watermark to text the resizing')
+
+Library.KeybindFrame.Visible = true; -- todo: add a function for this
+
+Library:OnUnload(function()
+    print('Unloaded!')
+    Library.Unloaded = true
+end)
+
+-- UI Settings
+local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
+
+-- I set NoUI so it does not show up in the keybinds menu
+MenuGroup:AddButton('Unload', function() Library:Unload() end)
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' }) 
+
+Library.ToggleKeybind = Options.MenuKeybind -- Allows you to have a custom keybind for the menu
+
+-- Addons:
+-- SaveManager (Allows you to have a configuration system)
+-- ThemeManager (Allows you to have a menu theme system)
+
+-- Hand the library over to our managers
+ThemeManager:SetLibrary(Library)
+SaveManager:SetLibrary(Library)
+
+-- Ignore keys that are used by ThemeManager. 
+-- (we dont want configs to save themes, do we?)
+SaveManager:IgnoreThemeSettings() 
+
+-- Adds our MenuKeybind to the ignore list 
+-- (do you want each config to have a different menu key? probably not.)
+SaveManager:SetIgnoreIndexes({ 'MenuKeybind' }) 
+
+-- use case for doing it this way: 
+-- a script hub could have themes in a global folder
+-- and game configs in a separate folder per game
+ThemeManager:SetFolder('MyScriptHub')
+SaveManager:SetFolder('MyScriptHub/specific-game')
+
+-- Builds our config menu on the right side of our tab
+SaveManager:BuildConfigSection(Tabs['UI Settings']) 
+
+-- Builds our theme menu (with plenty of built in themes) on the left side
+-- NOTE: you can also call ThemeManager:ApplyToGroupbox to add it to a specific groupbox
+ThemeManager:ApplyToTab(Tabs['UI Settings'])
+
+-- You can use the SaveManager:LoadAutoloadConfig() to load a config 
+-- which has been marked to be one that auto loads!
