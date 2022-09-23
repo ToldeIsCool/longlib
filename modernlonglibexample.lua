@@ -1,4 +1,5 @@
-loadstring(game:HttpGet('https://garfieldscripts.xyz/ui-libs/janlib.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ToldeIsCool/longlib/main/modernlonglib.lua'))()
+-- [remove all these below and make your own, this is just a template for you] ------------------------------------------------------------------------------------------------
 -- [Legit Tab UI] ------------------------------------------------------------------------------------------------------------------------------------------------------------
 local ToldeTab = library:AddTab("Legit"); 
 local ToldeColunm1 = LegitTab:AddColumn();
